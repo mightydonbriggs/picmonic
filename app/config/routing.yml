@@ -1,3 +1,7 @@
+picmonic:
+    resource: "@PicmonicBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

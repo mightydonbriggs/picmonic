@@ -1,0 +1,3 @@
+picmonic_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: PicmonicBundle:Default:index }
