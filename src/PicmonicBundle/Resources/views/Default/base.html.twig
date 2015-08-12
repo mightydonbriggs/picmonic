@@ -1,0 +1,115 @@
+{# src/PicmonicBundle/Resources/views/Default/base.html.twig #}
+{# This is the base view from which all other Picmonic views are extended #}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% block title %}Picmonic{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ asset('bundles/picmonic/css/bootstrap.min.css', version='3.1.1') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('bundles/picmonic/css/bootstrapValidator.min.css', version='0.5.2') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('bundles/picmonic/css/root.css') }}" rel="stylesheet" />
+{#    <link rel="icon" href="{{ asset('img/favicon.ico') }}">#}
+    
+    <!--[if lt IE 9]>
+        <script src="{{ asset('assets/js/lib/html5shiv.min.js', version='3.7.2') }}"></script>
+        <script src="{{ asset('assets/js/lib/respond.min.js', version='1.4.2') }}"></script>
+    <![endif]-->
+{#    <script src="{{ asset('assets/js/lib/jquery-1.11.0.min.js', version='1.11.0') }}"></script>#}
+{#    <script src="{{ asset('assets/js/lib/jquery-ui-effects.min.js', version='1.11.0') }}"></script>#}
+{#    <script src="{{ asset('assets/js/lib/bootstrap.min.js', version='3.1.1') }}"></script>#}
+{#    <script src="{{ asset('assets/js/lib/bootstrapValidator.min.js', version='0.5.2') }}"></script>#}
+{#    <script src="{{ asset('assets/js/lib/jquery.scrollTo.min.js', version='1.4.12') }}"></script>#}
+    <script>
+    // prevent IE from throwing "console is not defined error"
+    if (!window.console) window.console = { log: function() {} };
+    </script>
+        
+{#    {% javascripts '@PicmonicBundle/Resources/public/js/*' %}#}
+{#    {% endjavascripts %}#}
+{% block head %}
+{% endblock %}
+</head>
+
+<body>
+
+{#Folowoing is Bootstrap Navbar from: http://getbootstrap.com/components/#navbar#}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('picmonic_homepage')}}">Picmonic</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="{{ path('picmonic_homepage') }}">Commits</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ path('picmonic_homepage')}}">Query</a></li>
+            <li><a href="{{ path('picmonic_homepage')}}">Purge</a></li>
+          </ul>
+        </li>
+      </ul>      
+      
+      
+      
+      
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>    
+    
+    <div id="flash-notices">
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="flash-error bg-danger">{{ flashMessage }}</div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-notice bg-info">{{ flashMessage }}</div>
+        {% endfor %}
+        
+
+    {% block canvas %}
+        {% block precontainer %}
+        {% endblock %}
+        <div class="container" id="main-container">
+{% block body %}
+{% endblock %}
+        </div>
+
+        <div id="footer"{% if nocontainer is not defined or not nocontainer %} class="container hidden-print"{% endif %}>
+            <hr />
+            <center>
+                <strong>Don! Briggs</strong> | 525 General George Patton Rd. Nashville, TN, 37221 | donbriggs@donbriggs.com | 386.931.9443
+            </center>
+        </div>
+    
+    {% endblock %}
+
+{% if (block('pagecss')) %}
+{% block pagecss %}
+{% endblock %}
+{% endif %}
+
+{% if (block('pagejs')) %}
+{% block pagejs %}
+{% endblock %}
+{% endif %}
+
+</body>
+</html>
