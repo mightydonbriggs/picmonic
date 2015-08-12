@@ -11,5 +11,6 @@ class DefaultController extends Controller
 //      curl https://api.github.com/repos/joyent/node/commits
 
         return $this->render('PicmonicBundle:Default:index.html.twig');
+
     }
 }
